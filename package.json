@@ -1,6 +1,16 @@
 {
-  "name": "md-links",
+  "name": "@marinacezario/md-links",
   "version": "0.1.0",
+  "description": "MD-Links @ Laboratoria",
+  "keywords": [
+    "node",
+    "markdown",
+    "API",
+    "HTTP",
+    "CLI"
+  ],
+  "author": "Marina Cezário <marina.cezario@gmail.com> (https://github.com/marinacezario)",
+  "license": "MIT",
   "engines": {
     "node": ">=16.x"
   },
@@ -8,5 +18,13 @@
     "createdAt": "2023-03-30T13:20:37.337Z",
     "version": "5.6.0",
     "commit": "ffa75c8b2bede153844195479abeff01f3e34227"
+  },
+  "devDependencies": {
+    "eslint": "^8.40.0",
+    "jest": "^29.5.0"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "edit-package-json": "^0.8.12"
   }
 }
