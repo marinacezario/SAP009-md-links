@@ -41,8 +41,7 @@ function dirReader(dirPath) {
 function fileReader(file) {
   const isFileMd = path.extname(file) === '.md'
   if(!isFileMd) {
-    console.log('MUST INCLUDE ERROR HERE')
-    // return Promise.reject('não temos erros ainda')
+    return Promise.reject(new Error('file is not .md'))
   }
   return fs.promises.readFile(file).then(data => {
     return { file, data: data.toString() } 
@@ -53,6 +52,7 @@ function mainReader (dirPath) {
   return fs.promises.stat(dirPath)
   .then(statsObj => {
     return statsObj.isDirectory() ? dirReader(dirPath) : fileReader(dirPath)
+    .then((result) => [result]) 
   })
 }
 

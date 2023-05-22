@@ -1,9 +1,11 @@
-const { mainReader } = require ('./src/fs-reader.js')
+const { mdLinks } = require('./src/md-links.js')
 
-mainReader(process.argv[2])
- .then((result) => {
+const dirPath = process.argv[2]
+
+mdLinks(dirPath)
+  .then((result) => {
     console.log(result)
- })
- .catch((err) => {
-    console.log('this is the error: ' + err)
- })
+  })
+  .catch((error) => {
+    console.log('Error:', error.message)
+  })

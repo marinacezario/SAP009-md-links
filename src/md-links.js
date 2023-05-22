@@ -1,14 +1,13 @@
-const fs = require('fs')
-const path = require('path')
+const { mainReader } = require('./fs-reader')
+const { getLinks } = require('./links-handler')
 
-module.exports = function (dir, filterStr, callback) {
-
-    fs.readFile(process.argv[2], function(err, contents) {
-        if (err) {
-            throw err;
-            console.log(err);
-        }
-    
-        console.log(lines);
+function mdLinks (dirPath) {
+  return mainReader(dirPath).then(getLinks)
+    .catch((err) => {
+      throw new Error(`There are no links: ${err}`)
     })
+}
+
+module.exports = {
+  mdLinks
 }
