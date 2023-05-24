@@ -37,7 +37,7 @@ function validateLinks (linksArr) {
             throw new Error('Invalid fetch response')
           }
         })
-        .catch(err => ({ ...element, status: err, ok: false }))
+        .catch(err => ({ ...element, status: err.message, ok: false }))
     }))
 }
 
@@ -46,7 +46,6 @@ function linkStats (linksArr) {
     const hrefList = []
     let broken = 0
     if (linksArr) {
-      console.log('linksArr: ', linksArr)
       linksArr.forEach(element => {
         hrefList.push(element.href)
         if (element.ok === false) {

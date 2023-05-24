@@ -1,6 +1,5 @@
 const fs = require('fs')
 const path = require('path')
-// const errorHandling = require("./errorHandling");
 
 // leitor de diretorio precisa ter uma promessa de que vai ler o diretorio
 // usar o ReadDir do FS para ler o diretorio
@@ -14,25 +13,16 @@ function dirReader (dirPath) {
   return new Promise((resolve) => {
     fs.promises.readdir(dirPath)
       .then((files) => {
-        files.forEach(file => {
-          fs.promises.stat(`${dirPath}/${file}`)
-            .then(statsObj => {
-              if (statsObj.isDirectory()) {
-                return dirReader(`${dirPath}/${file}`)
-              } else {
-                const readMd = files.filter(file => {
-                  return path.extname(file) === '.md'
-                })
-                  .map(file => {
-                    return fileReader(path.resolve(dirPath, file))
-                  })
-                return Promise.all(readMd)
-                  .then((result) => {
-                    resolve(result)
-                  })
-              }
-            })
+        const readMd = files.filter(file => {
+          return path.extname(file) === '.md'
         })
+          .map(file => {
+            return fileReader(path.resolve(dirPath, file))
+          })
+        return Promise.all(readMd)
+          .then((result) => {
+            resolve(result)
+          })
       })
   })
 }

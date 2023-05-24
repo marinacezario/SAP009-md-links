@@ -12,7 +12,6 @@ function mdLinks (filePath, options) {
         return validateLinks(linksArr)
       })
       .then(linksArr => {
-        console.log('else fetchLinkObjResolved: ' + linksArr)
         if (options.stats) {
           return linkStats(linksArr)
         }
