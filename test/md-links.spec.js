@@ -10,7 +10,7 @@ describe('mdLinks', () => {
     jest.clearAllMocks()
   })
 
-  it('should return linksArr when options validate and stats are false', () => {
+  it('should return just a list of links when options validate and stats are false', () => {
     const filePath = '/path/to/file.md'
     const fileContent = '...'
     const linksArr = [{ href: 'https://example.com', text: 'Example' }]
@@ -28,15 +28,15 @@ describe('mdLinks', () => {
     })
   })
 
-  it('should return fetchLinkObjResolved when options validate is true and stats is false', () => {
+  it('should return a list of validated links when options validate is true and stats is false', () => {
     const filePath = '/path/to/file.md'
     const fileContent = '...'
     const linksArr = [{ href: 'https://example.com', text: 'Example' }]
-    const fetchLinkObjResolved = [{ href: 'https://example.com', text: 'Example', status: 200 }]
+    const validatedLinksArr = [{ href: 'https://example.com', text: 'Example', status: 200 }]
 
     mainReader.mockResolvedValue(fileContent)
     getLinks.mockReturnValue(linksArr)
-    validateLinks.mockResolvedValue(fetchLinkObjResolved)
+    validateLinks.mockResolvedValue(validatedLinksArr)
 
     const options = { validate: true, stats: false }
 
@@ -45,7 +45,7 @@ describe('mdLinks', () => {
       expect(getLinks).toHaveBeenCalledWith(fileContent)
       expect(validateLinks).toHaveBeenCalledWith(linksArr)
       expect(linkStats).not.toHaveBeenCalled()
-      expect(result).toEqual(fetchLinkObjResolved)
+      expect(result).toEqual(validatedLinksArr)
     })
   })
 
