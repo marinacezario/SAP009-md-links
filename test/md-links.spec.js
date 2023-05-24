@@ -49,14 +49,16 @@ describe('mdLinks', () => {
     })
   })
 
-  it('should return statsObj when options validate is false and stats is true', () => {
+  it('should return statistics when options validate is false and stats is true', () => {
     const filePath = '/path/to/file.md'
     const fileContent = '...'
     const linksArr = [{ href: 'https://example.com', text: 'Example' }]
+    const validatedLinksArr = [{ href: 'https://example.com', text: 'Example', ok: true, status: 200 }]
     const statsObj = { total: 1, unique: 1 }
 
     mainReader.mockResolvedValue(fileContent)
     getLinks.mockReturnValue(linksArr)
+    validateLinks.mockResolvedValue(validatedLinksArr)
     linkStats.mockResolvedValue(statsObj)
 
     const options = { validate: false, stats: true }
@@ -65,21 +67,21 @@ describe('mdLinks', () => {
       expect(mainReader).toHaveBeenCalledWith(filePath)
       expect(getLinks).toHaveBeenCalledWith(fileContent)
       expect(validateLinks).toHaveBeenCalledTimes(1)
-      expect(linkStats).toHaveBeenCalledWith(linksArr)
+      expect(linkStats).toHaveBeenCalledWith(validatedLinksArr)
       expect(result).toEqual(statsObj)
     })
   })
 
-  it('should return { links: fetchLinkObjResolved, stats: statsObj } when options validate and stats are true', () => {
+  it('should return links and statistics when options validate and stats are true', () => {
     const filePath = '/path/to/file.md'
     const fileContent = '...'
     const linksArr = [{ href: 'https://example.com', text: 'Example' }]
-    const fetchLinkObjResolved = [{ href: 'https://example.com', text: 'Example', status: 200 }]
-    const statsObj = { total: 1, unique: 1 }
+    const validatedLinksArr = [{ href: 'https://example.com', text: 'Example', ok: true, status: 200 }]
+    const statsObj = { links: linksArr, stats: { total: 1, unique: 1 } }
 
     mainReader.mockResolvedValue(fileContent)
     getLinks.mockReturnValue(linksArr)
-    validateLinks.mockResolvedValue(fetchLinkObjResolved)
+    validateLinks.mockResolvedValue(validatedLinksArr)
     linkStats.mockResolvedValue(statsObj)
 
     const options = { validate: true, stats: true }
@@ -88,8 +90,8 @@ describe('mdLinks', () => {
       expect(mainReader).toHaveBeenCalledWith(filePath)
       expect(getLinks).toHaveBeenCalledWith(fileContent)
       expect(validateLinks).toHaveBeenCalledWith(linksArr)
-      expect(linkStats).toHaveBeenCalledWith(fetchLinkObjResolved)
-      expect(result).toEqual({ links: fetchLinkObjResolved, stats: statsObj })
+      expect(linkStats).toHaveBeenCalledWith(validatedLinksArr)
+      expect(result).toEqual(statsObj)
     })
   })
 })
