@@ -5,7 +5,7 @@
 * [1. Introduction](#1-introduction)
 * [2. Summary](#2-summary)
 * [3. Instructions](#3-instructions)
-
+* [4. Tests](#3-tests)
 ***
 
 ## 1. Introduction
@@ -32,7 +32,7 @@ library in Javascript.
 
 Staying away from the browser to build a program to be executed through Node.js. 
 Learning about processes (`process.env`, `process.argv`, ...), how to interact
-with file systems, make http queries, etc.
+with file systems, make HTTP queries, etc.
 
 [Node.js](https://nodejs.org/pt-br/) is an execution environment for JavaScript
 built with [Chrome's V8 Javascript engine](https://developers.google.com/v8/). 
@@ -44,11 +44,15 @@ Developing your own library is an essential experience to any developer, compell
 you to think about the interface (API) of your _modules_ and how it will be used by
 other developers.
 
+This is the flowchart created to facilitate the creation of MD-links:
+
+![Flowchart](https://github.com/marinacezario/SAP009-md-links/blob/main/img/flowchart-MdLinks.png)
+
 ## 3. Instructions
 ### 3.1 Install
 To install this API, you should provide your command line the following command:
 
-`npm i @silversantos/md-links`
+`npm i @marinacezario/md-links`
 
 This library requires a Node.js version that equals or is upper than v18.16.0.
 
@@ -61,20 +65,26 @@ After installing, you can run it with the folllowing commands:
 
 With this command, you will receive a list of all the links containing in you file or directory.
 
-![Example with directory](https://github.com/silversantos/SAP009-md-links/blob/main/img/dir.png)
+![Example with directory](https://github.com/marinacezario/SAP009-md-links/blob/main/img/mdlinks-files.png)
 
-![Example with file.md](https://github.com/silversantos/SAP009-md-links/blob/main/img/dir-text-with-links.png)
+![Example with file.md](https://github.com/marinacezario/SAP009-md-links/blob/main/img/mdlinks-files-text-links.png)
 
 #### 3.2.2 To verify which links are valid
 Run `md-links directory-or-file.md --validate` to receive the http querie response. It will return you in your command line a list of each link in the directory or file and tell you if the links are ok or not.
 
-![Example --validate](https://github.com/silversantos/SAP009-md-links/blob/main/img/validate.png)
+![Example --validate](https://github.com/marinacezario/SAP009-md-links/blob/main/img/mdlinks-files-text-links-validate.png)
 
 #### 3.2.3 To receive statistics
 The command `md-links directory-or-file.md --stats` will provide you statistics of how many links are there in the given directory or file and how many of them are unique.
 
-![Example --stats](https://github.com/silversantos/SAP009-md-links/blob/main/img/stats.png)
+![Example --stats](https://github.com/marinacezario/SAP009-md-links/blob/main/img/mdlinks-files-text-links-stats.png)
 
 If you'd like to verify how many of them are broken, you may run  `md-links directory-or-file.md --validate --stats`
 
-![Example --validate --stats](https://github.com/silversantos/SAP009-md-links/blob/main/img/validate-stats.png)
+![Example --validate --stats](https://github.com/marinacezario/SAP009-md-links/blob/main/img/mdlinks-files-text-links-validate-stats.png)
+
+## 4. Tests
+
+The tests carried out were fully approved. The only point that was not taken into account so far was the handling of errors in case the program receives an invalid fetch response.
+
+![Tests result](https://github.com/marinacezario/SAP009-md-links/blob/main/img/tests.png)
